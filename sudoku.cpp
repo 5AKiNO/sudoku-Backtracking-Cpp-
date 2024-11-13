@@ -133,7 +133,7 @@ int main() {
   generarSudokuCompleto();
     
   //vacía 72 celdas aleatorias para crear un rompecabezas
-  hacerHuecos(72);
+  hacerHuecos(64);
     
   // Imprime el Sudoku generado
   imprimirSudoku();
