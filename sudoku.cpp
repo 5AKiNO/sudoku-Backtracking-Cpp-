@@ -1,6 +1,5 @@
 #include <iostream>
 #include <ctime>
-#include <cstdlib>
 using namespace std;
 
 //crea una matriz 9x9
@@ -66,7 +65,7 @@ void obtenerNumerosAleatorios(int numeros[]) {
 }
 
 //utiliza backtracking para resolver celdas vacias
-bool resolverSudoku() {
+bool backtracking() {
   int fila = -1, col = -1;
   bool estaVacio = true;
   //busca celdas con ceros
@@ -95,7 +94,7 @@ bool resolverSudoku() {
       sudoku[fila][col] = num;
       
       //intenta resolver lo que falte de forma recursiva
-      if (resolverSudoku()) return true;
+      if (backtracking()) return true;
       //retrocede si no funciona, de paso vacia la celda
       sudoku[fila][col] = 0;
       }
@@ -107,7 +106,7 @@ bool resolverSudoku() {
 //función para generar el tablero completo
 void generarSudokuCompleto() {
   //usa el solucionador para crear un tablero lleno
-  resolverSudoku();
+  backtracking();
 }
 
 //función para vaciar celdas de forma random
@@ -128,11 +127,11 @@ void hacerHuecos(int cantidadHuecos) {
 int main() {
   //semilla de números aleatorios
   srand(time(0));
-    
+
   //crea un Sudoku completamente completo
   generarSudokuCompleto();
     
-  //vacía 72 celdas aleatorias para crear un rompecabezas
+  //vacía 64 celdas aleatorias para crear un rompecabezas
   hacerHuecos(64);
     
   // Imprime el Sudoku generado
@@ -140,7 +139,7 @@ int main() {
   cout << "resolviendo Sudoku..." << endl;
     
   //resuelve el sudoku y verifica si tiene solucion
-  if (resolverSudoku()) {
+  if (backtracking()) {
     cout << "solución encontrada:" << endl;
     //imprime el sudoku solucionado
     imprimirSudoku();
